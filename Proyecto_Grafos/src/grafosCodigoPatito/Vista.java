@@ -8,15 +8,20 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
-public class Vista extends javax.swing.JFrame {
+public class Vista extends javax.swing.JFrame
+{
+    private static String nombreN[] = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N",
+    "M", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};//Nombre de los nodos
     private static boolean NodoActivo = false;//Indica se el boton Nodo esta activo
     private static boolean AristaActivo = false;//Indica si el boton arista esta activo
+    private static boolean EsPesada = false;
     private static ArrayList<Nodo> ListaNodos;//Lista con los vertices
     private static ArrayList<Arista> ListaAristas;//Lista con las aristas
-    private static int maxN = Nodo.getNombreN().length; //Maximo numero de nodos
-    private static int maxL = Arista.getNombreL().length; //Maximo numero de aristas
+    private static final int maxN = nombreN.length; //Maximo numero de nodos
+    private static final int maxL = Arista.getNombreL().length; //Maximo numero de aristas
     private static boolean MAdyacencia[][] = new boolean[maxN][maxN];//Matriz de adyacencia sin peso
     private static boolean MIncidencia[][] = new boolean[maxN][maxL];//Matriz de incidencia sin peso
+    private static int MAdyPesada[][] = new int[maxN][maxN];
     private String TextoMAdyacente = "", TextoMIncidencia = ""; //Texto con la matriz de adyacencia e incidencia
     private static int ContN = 0;//Contador del numero de nodos usados
     private static int ContL = 0;//Contador del numero de aristas usados
@@ -31,9 +36,16 @@ public class Vista extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         JFEditarArista.pack();
+        
+        //Se inicializan las matrices
         for (int r = 0; r < maxN; r++) {
             for (int s = 0; s < maxN; s++) {
                 MAdyacencia[r][s] = false;
+            }
+        }
+        for (int r = 0; r < maxN; r++) {
+            for (int s = 0; s < maxN; s++) {
+                MAdyPesada[r][s] = 0;
             }
         }
         for (int e = 0; e < maxN; e++) {
@@ -41,93 +53,48 @@ public class Vista extends javax.swing.JFrame {
                 MIncidencia[e][f] = false;
             }
         }
+        
         LBMatriz.setEditable(false);
         btnLinea.setEnabled(false);
         btnAyacente.setEnabled(false);
         btnIncidencia.setEnabled(false);
     }
 
-    public static boolean isNodoActivo() {
-        return NodoActivo;
-    }
+    public static boolean isNodoActivo() { return NodoActivo; }
 
-    public static void setNodoActivo(boolean NodoActivo) {
-        Vista.NodoActivo = NodoActivo;
-    }
+    public static void setNodoActivo(boolean NodoActivo) { Vista.NodoActivo = NodoActivo; }
 
-    public static boolean isAristaActivo() {
-        return AristaActivo;
-    }
+    public static boolean isAristaActivo() {  return AristaActivo; }
 
-    public static void setAristaActivo(boolean AristaActivo) {
-        Vista.AristaActivo = AristaActivo;
-    }
+    public static void setAristaActivo(boolean AristaActivo) { Vista.AristaActivo = AristaActivo; }
 
-    public static ArrayList<Nodo> getListaNodos() {
-        return ListaNodos;
-    }
+    public static ArrayList<Nodo> getListaNodos() { return ListaNodos; }
 
-    public static void setListaNodos(ArrayList<Nodo> ListaNodos) {
-        Vista.ListaNodos = ListaNodos;
-    }
+    public static void setListaNodos(ArrayList<Nodo> ListaNodos) { Vista.ListaNodos = ListaNodos; }
 
-    public static ArrayList<Arista> getListaAristas() {
-        return ListaAristas;
-    }
+    public static ArrayList<Arista> getListaAristas() { return ListaAristas; }
 
-    public static void setListaAristas(ArrayList<Arista> ListaAristas) {
-        Vista.ListaAristas = ListaAristas;
-    }
+    public static void setListaAristas(ArrayList<Arista> ListaAristas) { Vista.ListaAristas = ListaAristas; }
 
-    public static int getMaxN() {
-        return maxN;
-    }
+    public static int getMaxN() { return maxN; }
 
-    public static void setMaxN(int maxN) {
-        Vista.maxN = maxN;
-    }
+    public static int getMaxL() { return maxL; }
 
-    public static int getMaxL() {
-        return maxL;
-    }
+    public static boolean[][] getMAdyacencia() { return MAdyacencia; }
 
-    public static void setMaxL(int maxL) {
-        Vista.maxL = maxL;
-    }
+    public static void setMAdyacencia(boolean[][] MAdyacencia) { Vista.MAdyacencia = MAdyacencia; }
 
-    public static boolean[][] getMAdyacencia() {
-        return MAdyacencia;
-    }
+    public static boolean[][] getMIncidencia() { return MIncidencia; }
 
-    public static void setMAdyacencia(boolean[][] MAdyacencia) {
-        Vista.MAdyacencia = MAdyacencia;
-    }
+    public static void setMIncidencia(boolean[][] MIncidencia) { Vista.MIncidencia = MIncidencia; }
 
-    public static boolean[][] getMIncidencia() {
-        return MIncidencia;
-    }
+    public static int getContL() { return ContL; }
 
-    public static void setMIncidencia(boolean[][] MIncidencia) {
-        Vista.MIncidencia = MIncidencia;
-    }
+    public static void setContL(int ContL) { Vista.ContL = ContL; }
 
-    public static int getContL() {
-        return ContL;
-    }
+    public static int getContN() { return ContN; }
 
-    public static void setContL(int ContL) {
-        Vista.ContL = ContL;
-    }
-
-    public static int getContN() {
-        return ContN;
-    }
-
-    public static void setContN(int ContN) {
-        Vista.ContN = ContN;
-    }
-    
-    
+    public static void setContN(int ContN) { Vista.ContN = ContN; }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -136,7 +103,7 @@ public class Vista extends javax.swing.JFrame {
         JFEditarArista = new javax.swing.JFrame();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        TFPeso = new javax.swing.JTextField();
         BTSDireccion = new javax.swing.JButton();
         BTCDireccion = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -152,6 +119,10 @@ public class Vista extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         Algoritmos = new javax.swing.JMenu();
+        JMenu_Bipartito = new javax.swing.JMenu();
+        MIEmparejamientoAngel = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
 
         JFEditarArista.setBackground(new java.awt.Color(255, 255, 255));
@@ -170,10 +141,10 @@ public class Vista extends javax.swing.JFrame {
         jLabel2.setText("Agregar Arista");
         jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        jTextField1.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(0, 0, 0));
-        jTextField1.setText("1");
+        TFPeso.setBackground(new java.awt.Color(255, 255, 255));
+        TFPeso.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        TFPeso.setForeground(new java.awt.Color(0, 0, 0));
+        TFPeso.setText("1");
 
         BTSDireccion.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         BTSDireccion.setText("Sin diección");
@@ -201,7 +172,7 @@ public class Vista extends javax.swing.JFrame {
                         .addGap(5, 5, 5)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(TFPeso, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(JFEditarAristaLayout.createSequentialGroup()
                         .addGap(38, 38, 38)
                         .addComponent(BTSDireccion)
@@ -220,7 +191,7 @@ public class Vista extends javax.swing.JFrame {
                 .addGap(62, 62, 62)
                 .addGroup(JFEditarAristaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TFPeso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addGroup(JFEditarAristaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BTSDireccion)
@@ -353,8 +324,27 @@ public class Vista extends javax.swing.JFrame {
 
         Algoritmos.setText("Algoritmos");
 
+        JMenu_Bipartito.setText("Bipartito");
+
+        MIEmparejamientoAngel.setText("EmparejamientoAngel");
+        MIEmparejamientoAngel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MIEmparejamientoAngelActionPerformed(evt);
+            }
+        });
+        JMenu_Bipartito.add(MIEmparejamientoAngel);
+
+        Algoritmos.add(JMenu_Bipartito);
+
+        jMenu2.setText("Emparejamiento");
+
+        jMenuItem2.setText("Tonto");
+        jMenu2.add(jMenuItem2);
+
         jMenuItem1.setText("Edmons I");
-        Algoritmos.add(jMenuItem1);
+        jMenu2.add(jMenuItem1);
+
+        Algoritmos.add(jMenu2);
 
         jMenuBar1.add(Algoritmos);
 
@@ -423,6 +413,7 @@ public class Vista extends javax.swing.JFrame {
         else
         {
             NodoActivo = false;
+            vertice1 = null;
             AristaActivo = true;
             btnLinea.setBackground(Color.decode("#79f966"));
             btnVertice.setBackground(null);
@@ -433,33 +424,24 @@ public class Vista extends javax.swing.JFrame {
     public void muestraAdyacencia()
     {
         TextoMAdyacente = "Matriz de Adyacencia  \n\n";
-        int tNodos = ListaNodos.size();
-        int bit = 0;
-        String Nom = "";
-        TextoMAdyacente += "   ";
-        TextoMAdyacente += "  ";
-        for (int k = 0; k < tNodos; k++) {
-            TextoMAdyacente += "  " + Nodo.getNombreN()[k];
-        }
-        for (int k = 0; k < tNodos; k++)
+        TextoMAdyacente += "     ";
+        for (Nodo nodos : ListaNodos)//Imprime nombre de los nodos
         {
-            TextoMAdyacente += "  \n";
-            for (int l = 0; l < tNodos; l++) {
-                if (MAdyacencia[k][l])
+            TextoMAdyacente += "  " + nodos.Nombre;
+        }
+        for (Nodo nodosx : ListaNodos)
+        {
+            TextoMAdyacente += "\n" + nodosx.Nombre+"     ";
+            for (Nodo nodosy : ListaNodos)
+            {
+                if(MAdyacencia[ListaNodos.indexOf(nodosx)][ListaNodos.indexOf(nodosy)])
                 {
-                    bit = 1;
+                    TextoMAdyacente += 1+"  ";
                 }
                 else
                 {
-                    bit = 0;
+                    TextoMAdyacente += 0+"  ";
                 }
-                if (l == 0)
-                {
-                    Nom = Nodo.getNombreN()[k] + "  ";
-                } else {
-                    Nom = "";
-                }
-                TextoMAdyacente += Nom + bit + "   ";
             }
         }
         setMatriz(TextoMAdyacente, TextoMIncidencia);
@@ -479,7 +461,7 @@ public class Vista extends javax.swing.JFrame {
         TextoMIncidencia += "  ";
         for (int k = 0; k < tNodos; k++)
         {
-            TextoMIncidencia += "   " + Nodo.getNombreN()[k];
+            TextoMIncidencia += "   " + nombreN[k];
         }
         for (int k = 0; k < tNodos; k++)
         {
@@ -529,16 +511,17 @@ public class Vista extends javax.swing.JFrame {
             {    
                 if(ListaNodos.isEmpty())
                 {
+                    MIEmparejamientoAngel.setEnabled(true);
                     btnAyacente.setEnabled(true);
                     btnIncidencia.setEnabled(true);
                     btnLinea.setEnabled(true);
                 }
 
-                ListaNodos.add(new Nodo(evt.getX(),evt.getY(), ContN));
+                ListaNodos.add(new Nodo(evt.getX(),evt.getY(),nombreN[ContN]));
                 pintar(PanelGrafo.getGraphics());
                 ContN++;
                 
-                if(Nodo.getNombreN().length == ContN)
+                if(nombreN.length == ContN)
                 {
                     btnVertice.setEnabled(false);
                 }   
@@ -552,21 +535,14 @@ public class Vista extends javax.swing.JFrame {
                         if(vertice1 == null)
                         {
                             vertice1 = new Point(nodos.getX(), nodos.getY());
-                            x = nodos.getIndice();
+                            x = ListaNodos.indexOf(nodos);
                             nodos.pintar(PanelGrafo.getGraphics(), Color.GREEN);
                         }
                         else //Se hace el enlace
                         {
                             vertice2 = new Point(nodos.getX(), nodos.getY());
-                            y = nodos.getIndice();
-                            
+                            y = ListaNodos.indexOf(nodos);
                             JFEditarArista.setVisible(true);
-                            
-                            //Reinicia el contador de letras
-                            if (ContN == Nodo.getNombreN().length)
-                            {
-                                ContN = 0;
-                            }
                         }
                     }
                 }
@@ -575,34 +551,70 @@ public class Vista extends javax.swing.JFrame {
     }//GEN-LAST:event_PanelGrafoMouseClicked
 
     private void BTSDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTSDireccionActionPerformed
-        Vista.getListaAristas().add(new Arista(vertice1, vertice2, false));
-        Vista.getMAdyacencia()[x][y] = true;
-        Vista.getMAdyacencia()[y][x] = true;
-        Vista.getMIncidencia()[x][y] = true;
-        Vista.getMIncidencia()[y][x] = true;
-        vertice1 = null;
-        vertice2 = null;
-        ContL++;
-        pintar(PanelGrafo.getGraphics());
-        JFEditarArista.setVisible(false);
+        try
+        {
+            int peso;
+            if ((peso = Integer.valueOf(TFPeso.getText())) > 0) {
+                MAdyPesada[x][y] = peso;
+                MAdyPesada[y][x] = peso;
+            } else {
+                MAdyPesada[x][y] = 1;
+                MAdyPesada[y][x] = 1;
+            }
+            MAdyacencia[x][y] = true;
+            MAdyacencia[y][x] = true;
+            MIncidencia[x][y] = true;
+            MIncidencia[y][x] = true;
+            ListaAristas.add(new Arista(vertice1, vertice2, false, peso));
+            vertice1 = null;
+            vertice2 = null;
+            ContL++;
+            pintar(PanelGrafo.getGraphics());
+            JFEditarArista.setVisible(false);
+        }
+        catch(java.lang.NumberFormatException ex)
+        {
+            JOptionPane.showMessageDialog(JFEditarArista, "Numero de no válido", "Mensaje de Advertencia", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_BTSDireccionActionPerformed
 
     private void BTCDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTCDireccionActionPerformed
-        Vista.getListaAristas().add(new Arista(vertice1, vertice2, true));
-        Vista.getMAdyacencia()[x][y] = true;
-        Vista.getMIncidencia()[x][y] = true;
-        vertice1 = null;
-        vertice2 = null;
-        ContL++;
-        pintar(PanelGrafo.getGraphics());
-        JFEditarArista.setVisible(false);
+        try
+        {
+            int peso;
+            if((peso = Integer.valueOf(TFPeso.getText())) > 0)
+            {
+                MAdyPesada[x][y] = peso;
+            }
+            else
+            {
+                MAdyPesada[x][y] = 1;
+            }
+            MAdyacencia[x][y] = true;
+            MIncidencia[x][y] = true;
+            ListaAristas.add(new Arista(vertice1, vertice2, true, peso));
+            vertice1 = null;
+            vertice2 = null;
+            ContL++;
+            pintar(PanelGrafo.getGraphics());
+            MIEmparejamientoAngel.setEnabled(false);
+            JFEditarArista.setVisible(false);
+        }
+        catch(java.lang.NumberFormatException ex)
+        {
+            JOptionPane.showMessageDialog(JFEditarArista, "Numero de no válido", "Mensaje de Advertencia", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_BTCDireccionActionPerformed
+
+    private void MIEmparejamientoAngelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MIEmparejamientoAngelActionPerformed
+        Forma1_Bipartito.BipartitoAngel();
+    }//GEN-LAST:event_MIEmparejamientoAngelActionPerformed
     
     private void pintar(Graphics g)
     {
         for(Arista aristas : Vista.getListaAristas())
         {
-            aristas.pintar(g);
+            aristas.pintar(g,Color.BLACK);
         }
         for(Nodo nodos : Vista.getListaNodos())
         {
@@ -648,8 +660,11 @@ public class Vista extends javax.swing.JFrame {
     private javax.swing.JButton BTCDireccion;
     private javax.swing.JButton BTSDireccion;
     private javax.swing.JFrame JFEditarArista;
+    private javax.swing.JMenu JMenu_Bipartito;
     private javax.swing.JTextArea LBMatriz;
+    private javax.swing.JMenuItem MIEmparejamientoAngel;
     public static javax.swing.JPanel PanelGrafo;
+    private javax.swing.JTextField TFPeso;
     private javax.swing.JButton btnAyacente;
     private javax.swing.JButton btnIncidencia;
     private javax.swing.JButton btnLinea;
@@ -658,11 +673,12 @@ public class Vista extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblEstado;
     // End of variables declaration//GEN-END:variables
 }

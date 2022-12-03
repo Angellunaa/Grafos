@@ -6,6 +6,7 @@ package grafosCodigoPatito;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -16,19 +17,21 @@ public class Arista
     private Point V2;
     private Point A1;
     private Point A2;
-    private Boolean Dirigida;
-    private static String nombreL[] = {"A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8", "A9", "A10",//Nombre de las aristas
+    private final Boolean Dirigida;
+    private int peso;
+    private final static String nombreL[] = {"A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8", "A9", "A10",//Nombre de las aristas
         "A11", "A12", "A13", "A14", "A15", "A16", "A17", "A18", "A19", "A20"};
-    private static final double DELTA = Math.PI / 4;
-    private static final double C = 50;
+    private static final double DELTA = Math.PI / 6;//Longitud del angulo de apertutra de la cabeza de la flecha
+    private static final double C = 30;//Longitud de las lineas de la flecha
     
-    public Arista(Point V1, Point V2, Boolean Dirigida)
+    public Arista(Point V1, Point V2, Boolean Dirigida, int peso)
     {
         this.V1 = V1;
         this.V2 = V2;
         this.A1 = new Point();
         this.A2 = new Point();
         this.Dirigida = Dirigida;
+        this.peso = peso;
     }
     
     private void calcularflecha()
@@ -86,12 +89,12 @@ public class Arista
         return new Point((int)xp, (int)yp);
     }
     
-    public void pintar(Graphics g)
+    public void pintar(Graphics g, Color col)
     {
         Graphics2D draw = (Graphics2D) g;
         BasicStroke grosor = new BasicStroke(5);
         draw.setStroke(grosor);
-        draw.setColor(Color.BLACK);//Color de la arista
+        draw.setColor(col);//Color de la arista
         if(Dirigida == false)
         {
             if(V1.x == V2.x && V1.y == V2.y)
@@ -111,17 +114,34 @@ public class Arista
             }
             else
             {
-                draw.setColor(Color.BLACK);
                 calcularflecha();
                 draw.drawLine(V1.x, V1.y, V2.x, V2.y);
                 draw.drawLine(A1.x, A1.y, V2.x, V2.y);
                 draw.drawLine(A2.x, A2.y, V2.x, V2.y);
             }
-            
         }
-        
-        //draw.setColor(Color.BLACK);
-        //draw.drawString(nombreL[Vista.getContL()], ((V1.x) - (V2.x))/2, ((V1.y) - (V2.y))/2);
+        if(peso > 1)
+        {
+            Font Fuente = new Font("MONOSPACED",Font.BOLD, 18);
+            draw.setFont(Fuente);
+            draw.setColor(new Color(255, 87, 51));
+            if(V1.x > V2.x && V1.y > V2.y)
+            {
+                draw.drawString(String.valueOf(peso), V1.x - Math.abs((V1.x-V2.x)/2), V1.y - Math.abs((V1.y-V2.y)/2));
+            }
+            else if(V1.x < V2.x && V1.y < V2.y)
+            {
+                draw.drawString(String.valueOf(peso), V2.x - Math.abs((V1.x-V2.x)/2), V2.y - Math.abs((V1.y-V2.y)/2));
+            }
+            else if(V1.x > V2.x && V1.y < V2.y)
+            {
+                draw.drawString(String.valueOf(peso), V1.x - Math.abs((V1.x-V2.x)/2), V2.y - Math.abs((V1.y-V2.y)/2));
+            }
+            else
+            {
+                draw.drawString(String.valueOf(peso), V2.x - Math.abs((V1.x-V2.x)/2), V1.y - Math.abs((V1.y-V2.y)/2));
+            }
+        }
     }
 
     public Point getV1() {

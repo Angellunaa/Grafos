@@ -12,15 +12,13 @@ import java.awt.Graphics2D;
 public class Nodo
 {
     private int x, y;//Cordenadas del vertices
-    private int indice;
+    public final String Nombre;
     public static final int d = 30; //Diametro del circulo
-    private static String nombreN[] = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N",
-    "M", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};//Nombre de los nodos
 
-    public Nodo(int x, int y, int indice) {
+    public Nodo(int x, int y, String Nombre) {
         this.x = x;
         this.y = y;
-        this.indice = indice;
+        this.Nombre = Nombre;
     }
 
     public int getX() {
@@ -38,18 +36,6 @@ public class Nodo
     public void setY(int y) {
         this.y = y;
     }
-
-    public int getIndice() {
-        return indice;
-    }
-
-    public void setIndice(int indice) {
-        this.indice = indice;
-    }
-
-    public static String[] getNombreN() {
-        return nombreN;
-    }
     
     public void pintar(Graphics g, Color col)
     {
@@ -62,6 +48,6 @@ public class Nodo
         draw.setFont(nuevaFuente);//Le agrega la fuente al nodo
         
         //Le agrega nombre al vertice
-        draw.drawString(nombreN[indice], x-5, y+5);//Dibuja el nombre del vertice
+        draw.drawString(Nombre, x-5, y+5);//Dibuja el nombre del vertice
     }
 }
