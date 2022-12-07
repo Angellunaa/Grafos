@@ -2,6 +2,18 @@
 import java.util.LinkedList;
 import java.util.Scanner;
 
+/*
+0 0 1
+0 0 1
+1 1 0
+
+0 1 0 0 0 0
+1 0 1 1 0 0
+0 1 0 0 0 1
+0 1 0 0 1 1
+0 0 0 1 0 1
+0 0 1 1 1 0
+*/
 
 
 public class GN_tonto {
@@ -71,5 +83,6 @@ public class GN_tonto {
                 
             }
         }
+        System.out.println("\n\n");
     }
 }

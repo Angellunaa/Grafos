@@ -2,6 +2,21 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+
+/*
+9 9   cantidad: Nodos - aristas
+
+Aristas:
+1 2
+2 3
+3 4
+4 5
+5 6
+6 7
+7 8
+8 9
+9 5
+*/
  
 public class GN_maximo_edmonds_I
 {
