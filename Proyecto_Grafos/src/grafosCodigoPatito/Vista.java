@@ -117,13 +117,19 @@ public class Vista extends javax.swing.JFrame
         PanelGrafo = new javax.swing.JPanel();
         lblEstado = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        Algoritmos = new javax.swing.JMenu();
+        JMenuHerramientas = new javax.swing.JMenu();
+        MIRepaint = new javax.swing.JMenuItem();
+        JMenuAlgoritmos = new javax.swing.JMenu();
         JMenu_Bipartito = new javax.swing.JMenu();
-        MIEmparejamientoAngel = new javax.swing.JMenuItem();
+        MIEsBIpartitoAngel = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
+        JMenuPareo_Bipartito = new javax.swing.JMenu();
+        MIPareoBipartito_Tonto = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        MIDFS = new javax.swing.JMenuItem();
+        MIBFS = new javax.swing.JMenuItem();
 
         JFEditarArista.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -319,22 +325,31 @@ public class Vista extends javax.swing.JFrame
 
         lblEstado.setBorder(javax.swing.BorderFactory.createTitledBorder("Estado"));
 
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
+        JMenuHerramientas.setText("Herramientas");
 
-        Algoritmos.setText("Algoritmos");
+        MIRepaint.setText("Volver a pintar");
+        MIRepaint.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MIRepaintActionPerformed(evt);
+            }
+        });
+        JMenuHerramientas.add(MIRepaint);
+
+        jMenuBar1.add(JMenuHerramientas);
+
+        JMenuAlgoritmos.setText("Algoritmos");
 
         JMenu_Bipartito.setText("Bipartito");
 
-        MIEmparejamientoAngel.setText("EmparejamientoAngel");
-        MIEmparejamientoAngel.addActionListener(new java.awt.event.ActionListener() {
+        MIEsBIpartitoAngel.setLabel("¿Es Bipartito?");
+        MIEsBIpartitoAngel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MIEmparejamientoAngelActionPerformed(evt);
+                MIEsBIpartitoAngelActionPerformed(evt);
             }
         });
-        JMenu_Bipartito.add(MIEmparejamientoAngel);
+        JMenu_Bipartito.add(MIEsBIpartitoAngel);
 
-        Algoritmos.add(JMenu_Bipartito);
+        JMenuAlgoritmos.add(JMenu_Bipartito);
 
         jMenu2.setText("Emparejamiento");
 
@@ -344,9 +359,41 @@ public class Vista extends javax.swing.JFrame
         jMenuItem1.setText("Edmons I");
         jMenu2.add(jMenuItem1);
 
-        Algoritmos.add(jMenu2);
+        JMenuAlgoritmos.add(jMenu2);
 
-        jMenuBar1.add(Algoritmos);
+        JMenuPareo_Bipartito.setText("Pareo Bipartito");
+
+        MIPareoBipartito_Tonto.setText("Tonto");
+        MIPareoBipartito_Tonto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MIPareoBipartito_TontoActionPerformed(evt);
+            }
+        });
+        JMenuPareo_Bipartito.add(MIPareoBipartito_Tonto);
+
+        JMenuAlgoritmos.add(JMenuPareo_Bipartito);
+
+        jMenu1.setText("Grafos Dirigidos");
+
+        MIDFS.setText("Recorrido en profundidad");
+        MIDFS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MIDFSActionPerformed(evt);
+            }
+        });
+        jMenu1.add(MIDFS);
+
+        MIBFS.setText("Recorrido en anchura");
+        MIBFS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MIBFSActionPerformed(evt);
+            }
+        });
+        jMenu1.add(MIBFS);
+
+        JMenuAlgoritmos.add(jMenu1);
+
+        jMenuBar1.add(JMenuAlgoritmos);
 
         setJMenuBar(jMenuBar1);
 
@@ -511,7 +558,6 @@ public class Vista extends javax.swing.JFrame
             {    
                 if(ListaNodos.isEmpty())
                 {
-                    MIEmparejamientoAngel.setEnabled(true);
                     btnAyacente.setEnabled(true);
                     btnIncidencia.setEnabled(true);
                     btnLinea.setEnabled(true);
@@ -597,7 +643,6 @@ public class Vista extends javax.swing.JFrame
             vertice2 = null;
             ContL++;
             pintar(PanelGrafo.getGraphics());
-            MIEmparejamientoAngel.setEnabled(false);
             JFEditarArista.setVisible(false);
         }
         catch(java.lang.NumberFormatException ex)
@@ -606,11 +651,51 @@ public class Vista extends javax.swing.JFrame
         }
     }//GEN-LAST:event_BTCDireccionActionPerformed
 
-    private void MIEmparejamientoAngelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MIEmparejamientoAngelActionPerformed
+    private void MIEsBIpartitoAngelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MIEsBIpartitoAngelActionPerformed
         Forma1_Bipartito.BipartitoAngel();
-    }//GEN-LAST:event_MIEmparejamientoAngelActionPerformed
+    }//GEN-LAST:event_MIEsBIpartitoAngelActionPerformed
+
+    private void MIRepaintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MIRepaintActionPerformed
+        this.pintar(PanelGrafo.getGraphics());
+    }//GEN-LAST:event_MIRepaintActionPerformed
+
+    private void MIPareoBipartito_TontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MIPareoBipartito_TontoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MIPareoBipartito_TontoActionPerformed
+
+    private void MIDFSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MIDFSActionPerformed
+        String NombreNodos[] = new String[ListaNodos.size()];
+        int i = 0;
+        int seleccion = -1;
+        for(Nodo nodos : ListaNodos)
+        {
+            NombreNodos[i] = nodos.Nombre;
+            i++;
+        }
+        seleccion = JOptionPane.showOptionDialog(null, "Elige el nodo donde empezara el recorrido", "Elige un nodo", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, NombreNodos, NombreNodos[0]);
+        if(seleccion != -1)
+        {
+            Recorridos.DFS(MAdyacencia, ListaNodos, seleccion);
+        }
+    }//GEN-LAST:event_MIDFSActionPerformed
+
+    private void MIBFSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MIBFSActionPerformed
+        String NombreNodos[] = new String[ListaNodos.size()];
+        int i = 0;
+        int seleccion = -1;
+        for(Nodo nodos : ListaNodos)
+        {
+            NombreNodos[i] = nodos.Nombre;
+            i++;
+        }
+        seleccion = JOptionPane.showOptionDialog(null, "Elige el nodo donde empezara el recorrido", "Elige un nodo", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, NombreNodos, NombreNodos[0]);
+        if(seleccion != -1)
+        {
+            Recorridos.BFS(MAdyacencia, ListaNodos, seleccion);
+        }
+    }//GEN-LAST:event_MIBFSActionPerformed
     
-    private void pintar(Graphics g)
+    public static void pintar(Graphics g)
     {
         for(Arista aristas : Vista.getListaAristas())
         {
@@ -656,13 +741,19 @@ public class Vista extends javax.swing.JFrame
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu Algoritmos;
     private javax.swing.JButton BTCDireccion;
     private javax.swing.JButton BTSDireccion;
     private javax.swing.JFrame JFEditarArista;
+    private javax.swing.JMenu JMenuAlgoritmos;
+    private javax.swing.JMenu JMenuHerramientas;
+    private javax.swing.JMenu JMenuPareo_Bipartito;
     private javax.swing.JMenu JMenu_Bipartito;
     private javax.swing.JTextArea LBMatriz;
-    private javax.swing.JMenuItem MIEmparejamientoAngel;
+    private javax.swing.JMenuItem MIBFS;
+    private javax.swing.JMenuItem MIDFS;
+    private javax.swing.JMenuItem MIEsBIpartitoAngel;
+    private javax.swing.JMenuItem MIPareoBipartito_Tonto;
+    private javax.swing.JMenuItem MIRepaint;
     public static javax.swing.JPanel PanelGrafo;
     private javax.swing.JTextField TFPeso;
     private javax.swing.JButton btnAyacente;

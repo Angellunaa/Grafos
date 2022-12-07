@@ -62,6 +62,12 @@ public class Forma1_Bipartito
             }
             cola.poll();
         }
+        if(v1.size()+v2.size() < Vista.getListaNodos().size())
+        {
+            v1.clear();
+            v2.clear();
+            return false;
+        }
         return true;
     }
     public static void BipartitoAngel()

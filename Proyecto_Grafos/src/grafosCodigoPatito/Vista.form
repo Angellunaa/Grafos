@@ -136,12 +136,22 @@
     </Container>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
       <SubComponents>
-        <Menu class="javax.swing.JMenu" name="jMenu1">
+        <Menu class="javax.swing.JMenu" name="JMenuHerramientas">
           <Properties>
-            <Property name="text" type="java.lang.String" value="File"/>
+            <Property name="text" type="java.lang.String" value="Herramientas"/>
           </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="MIRepaint">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Volver a pintar"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MIRepaintActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="Algoritmos">
+        <Menu class="javax.swing.JMenu" name="JMenuAlgoritmos">
           <Properties>
             <Property name="text" type="java.lang.String" value="Algoritmos"/>
           </Properties>
@@ -151,12 +161,12 @@
                 <Property name="text" type="java.lang.String" value="Bipartito"/>
               </Properties>
               <SubComponents>
-                <MenuItem class="javax.swing.JMenuItem" name="MIEmparejamientoAngel">
+                <MenuItem class="javax.swing.JMenuItem" name="MIEsBIpartitoAngel">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="EmparejamientoAngel"/>
+                    <Property name="label" type="java.lang.String" value="&#xbf;Es Bipartito?"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MIEmparejamientoAngelActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MIEsBIpartitoAngelActionPerformed"/>
                   </Events>
                 </MenuItem>
               </SubComponents>
@@ -175,6 +185,44 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Edmons I"/>
                   </Properties>
+                </MenuItem>
+              </SubComponents>
+            </Menu>
+            <Menu class="javax.swing.JMenu" name="JMenuPareo_Bipartito">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Pareo Bipartito"/>
+              </Properties>
+              <SubComponents>
+                <MenuItem class="javax.swing.JMenuItem" name="MIPareoBipartito_Tonto">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Tonto"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MIPareoBipartito_TontoActionPerformed"/>
+                  </Events>
+                </MenuItem>
+              </SubComponents>
+            </Menu>
+            <Menu class="javax.swing.JMenu" name="jMenu1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Grafos Dirigidos"/>
+              </Properties>
+              <SubComponents>
+                <MenuItem class="javax.swing.JMenuItem" name="MIDFS">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Recorrido en profundidad"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MIDFSActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="MIBFS">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Recorrido en anchura"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MIBFSActionPerformed"/>
+                  </Events>
                 </MenuItem>
               </SubComponents>
             </Menu>
