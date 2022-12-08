@@ -1,6 +1,7 @@
 package grafosCodigoPatito;
 
 import java.awt.Color;
+import java.awt.ComponentOrientation;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -30,6 +31,7 @@ public class Vista extends javax.swing.JFrame
 
     public Vista() {
         initComponents();
+        jMenuBar1.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
         ListaNodos = new ArrayList<>();
         ListaAristas = new ArrayList<>();
         setTitle("Grafos");
@@ -123,7 +125,7 @@ public class Vista extends javax.swing.JFrame
         JMenu_Bipartito = new javax.swing.JMenu();
         MIEsBIpartitoAngel = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        MIEmparejamiento_Tonto = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         JMenuPareo_Bipartito = new javax.swing.JMenu();
         MIPareoBipartito_Tonto = new javax.swing.JMenuItem();
@@ -353,8 +355,13 @@ public class Vista extends javax.swing.JFrame
 
         jMenu2.setText("Emparejamiento");
 
-        jMenuItem2.setText("Tonto");
-        jMenu2.add(jMenuItem2);
+        MIEmparejamiento_Tonto.setText("Tonto");
+        MIEmparejamiento_Tonto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MIEmparejamiento_TontoActionPerformed(evt);
+            }
+        });
+        jMenu2.add(MIEmparejamiento_Tonto);
 
         jMenuItem1.setText("Edmons I");
         jMenu2.add(jMenuItem1);
@@ -652,15 +659,17 @@ public class Vista extends javax.swing.JFrame
     }//GEN-LAST:event_BTCDireccionActionPerformed
 
     private void MIEsBIpartitoAngelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MIEsBIpartitoAngelActionPerformed
-        Forma1_Bipartito.BipartitoAngel();
+        Bipartito.BipartitoAngel();
     }//GEN-LAST:event_MIEsBIpartitoAngelActionPerformed
 
     private void MIRepaintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MIRepaintActionPerformed
-        this.pintar(PanelGrafo.getGraphics());
+        Graphics g = PanelGrafo.getGraphics();
+        g.clearRect(0, 0, PanelGrafo.getWidth(), PanelGrafo.getHeight());
+        pintar(g);
     }//GEN-LAST:event_MIRepaintActionPerformed
 
     private void MIPareoBipartito_TontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MIPareoBipartito_TontoActionPerformed
-        // TODO add your handling code here:
+        PareosBipartitos.Tonto(MAdyacencia, ListaNodos);
     }//GEN-LAST:event_MIPareoBipartito_TontoActionPerformed
 
     private void MIDFSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MIDFSActionPerformed
@@ -694,6 +703,11 @@ public class Vista extends javax.swing.JFrame
             Recorridos.BFS(MAdyacencia, ListaNodos, seleccion);
         }
     }//GEN-LAST:event_MIBFSActionPerformed
+
+    private void MIEmparejamiento_TontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MIEmparejamiento_TontoActionPerformed
+        Emparejamiento.Tonto(MAdyacencia, ListaNodos);
+        System.out.print("Si salio");
+    }//GEN-LAST:event_MIEmparejamiento_TontoActionPerformed
     
     public static void pintar(Graphics g)
     {
@@ -751,6 +765,7 @@ public class Vista extends javax.swing.JFrame
     private javax.swing.JTextArea LBMatriz;
     private javax.swing.JMenuItem MIBFS;
     private javax.swing.JMenuItem MIDFS;
+    private javax.swing.JMenuItem MIEmparejamiento_Tonto;
     private javax.swing.JMenuItem MIEsBIpartitoAngel;
     private javax.swing.JMenuItem MIPareoBipartito_Tonto;
     private javax.swing.JMenuItem MIRepaint;
@@ -767,7 +782,6 @@ public class Vista extends javax.swing.JFrame
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblEstado;

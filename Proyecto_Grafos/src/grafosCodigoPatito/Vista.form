@@ -176,10 +176,13 @@
                 <Property name="text" type="java.lang.String" value="Emparejamiento"/>
               </Properties>
               <SubComponents>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
+                <MenuItem class="javax.swing.JMenuItem" name="MIEmparejamiento_Tonto">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Tonto"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MIEmparejamiento_TontoActionPerformed"/>
+                  </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
                   <Properties>
