@@ -13,6 +13,14 @@ import java.util.Scanner;
 0 1 0 0 1 1
 0 0 0 1 0 1
 0 0 1 1 1 0
+
+0 1 1 0 0 0 0
+1 0 0 1 0 0 0
+1 0 0 1 0 0 1
+0 1 1 0 1 1 0
+0 0 0 1 0 0 0
+0 0 0 1 0 0 0
+0 0 1 0 0 0 0
 */
 
 
@@ -78,6 +86,7 @@ public class GN_tonto {
                         {
                             System.exit(0);
                         }
+                        contV=0;
                     }
                 }
                 
