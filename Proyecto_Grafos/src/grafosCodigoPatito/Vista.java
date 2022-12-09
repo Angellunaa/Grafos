@@ -126,9 +126,12 @@ public class Vista extends javax.swing.JFrame
         MIEsBIpartitoAngel = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         MIEmparejamiento_Tonto = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        MIEmparejamiento_Maximo = new javax.swing.JMenuItem();
+        MIEmparejamiento_perfecto = new javax.swing.JMenuItem();
         JMenuPareo_Bipartito = new javax.swing.JMenu();
         MIPareoBipartito_Tonto = new javax.swing.JMenuItem();
+        MIPareBipartito_Maximo = new javax.swing.JMenuItem();
+        MIPareoBipartito_Perfecto = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         MIDFS = new javax.swing.JMenuItem();
         MIBFS = new javax.swing.JMenuItem();
@@ -363,8 +366,21 @@ public class Vista extends javax.swing.JFrame
         });
         jMenu2.add(MIEmparejamiento_Tonto);
 
-        jMenuItem1.setText("Edmons I");
-        jMenu2.add(jMenuItem1);
+        MIEmparejamiento_Maximo.setText("Edmons I (Maximo)");
+        MIEmparejamiento_Maximo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MIEmparejamiento_MaximoActionPerformed(evt);
+            }
+        });
+        jMenu2.add(MIEmparejamiento_Maximo);
+
+        MIEmparejamiento_perfecto.setText("Edmonds I (Perfecto)");
+        MIEmparejamiento_perfecto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MIEmparejamiento_perfectoActionPerformed(evt);
+            }
+        });
+        jMenu2.add(MIEmparejamiento_perfecto);
 
         JMenuAlgoritmos.add(jMenu2);
 
@@ -377,6 +393,22 @@ public class Vista extends javax.swing.JFrame
             }
         });
         JMenuPareo_Bipartito.add(MIPareoBipartito_Tonto);
+
+        MIPareBipartito_Maximo.setText("Maximo");
+        MIPareBipartito_Maximo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MIPareBipartito_MaximoActionPerformed(evt);
+            }
+        });
+        JMenuPareo_Bipartito.add(MIPareBipartito_Maximo);
+
+        MIPareoBipartito_Perfecto.setText("Perfecto");
+        MIPareoBipartito_Perfecto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MIPareoBipartito_PerfectoActionPerformed(evt);
+            }
+        });
+        JMenuPareo_Bipartito.add(MIPareoBipartito_Perfecto);
 
         JMenuAlgoritmos.add(JMenuPareo_Bipartito);
 
@@ -468,6 +500,7 @@ public class Vista extends javax.swing.JFrame
         {
             NodoActivo = false;
             vertice1 = null;
+            pintar(PanelGrafo.getGraphics());
             AristaActivo = true;
             btnLinea.setBackground(Color.decode("#79f966"));
             btnVertice.setBackground(null);
@@ -664,7 +697,6 @@ public class Vista extends javax.swing.JFrame
 
     private void MIRepaintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MIRepaintActionPerformed
         Graphics g = PanelGrafo.getGraphics();
-        g.clearRect(0, 0, PanelGrafo.getWidth(), PanelGrafo.getHeight());
         pintar(g);
     }//GEN-LAST:event_MIRepaintActionPerformed
 
@@ -708,9 +740,40 @@ public class Vista extends javax.swing.JFrame
         Emparejamiento.Tonto(MAdyacencia, ListaNodos);
         System.out.print("Si salio");
     }//GEN-LAST:event_MIEmparejamiento_TontoActionPerformed
+
+    private void MIEmparejamiento_MaximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MIEmparejamiento_MaximoActionPerformed
+        Emparejamiento.Maximo(ListaNodos);
+    }//GEN-LAST:event_MIEmparejamiento_MaximoActionPerformed
+
+    private void MIEmparejamiento_perfectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MIEmparejamiento_perfectoActionPerformed
+        Emparejamiento.Perfecto(ListaNodos);
+    }//GEN-LAST:event_MIEmparejamiento_perfectoActionPerformed
+
+    private void MIPareBipartito_MaximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MIPareBipartito_MaximoActionPerformed
+        if(Bipartito.EsBipartito(MAdyacencia, ListaNodos))
+        {
+            Emparejamiento.Maximo(ListaNodos);
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "El algoritmo solo puede aplicarse en grafos bipartitos");
+        }
+    }//GEN-LAST:event_MIPareBipartito_MaximoActionPerformed
+
+    private void MIPareoBipartito_PerfectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MIPareoBipartito_PerfectoActionPerformed
+        if(Bipartito.EsBipartito(MAdyacencia, ListaNodos))
+        {
+            Emparejamiento.Perfecto(ListaNodos);
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "El algoritmo solo puede aplicarse en grafos bipartitos");
+        }
+    }//GEN-LAST:event_MIPareoBipartito_PerfectoActionPerformed
     
     public static void pintar(Graphics g)
     {
+        g.clearRect(0, 0, PanelGrafo.getWidth(), PanelGrafo.getHeight());
         for(Arista aristas : Vista.getListaAristas())
         {
             aristas.pintar(g,Color.BLACK);
@@ -765,8 +828,12 @@ public class Vista extends javax.swing.JFrame
     private javax.swing.JTextArea LBMatriz;
     private javax.swing.JMenuItem MIBFS;
     private javax.swing.JMenuItem MIDFS;
+    private javax.swing.JMenuItem MIEmparejamiento_Maximo;
     private javax.swing.JMenuItem MIEmparejamiento_Tonto;
+    private javax.swing.JMenuItem MIEmparejamiento_perfecto;
     private javax.swing.JMenuItem MIEsBIpartitoAngel;
+    private javax.swing.JMenuItem MIPareBipartito_Maximo;
+    private javax.swing.JMenuItem MIPareoBipartito_Perfecto;
     private javax.swing.JMenuItem MIPareoBipartito_Tonto;
     private javax.swing.JMenuItem MIRepaint;
     public static javax.swing.JPanel PanelGrafo;
@@ -781,7 +848,6 @@ public class Vista extends javax.swing.JFrame
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblEstado;

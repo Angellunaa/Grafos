@@ -184,10 +184,21 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MIEmparejamiento_TontoActionPerformed"/>
                   </Events>
                 </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
+                <MenuItem class="javax.swing.JMenuItem" name="MIEmparejamiento_Maximo">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Edmons I"/>
+                    <Property name="text" type="java.lang.String" value="Edmons I (Maximo)"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MIEmparejamiento_MaximoActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="MIEmparejamiento_perfecto">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Edmonds I (Perfecto)"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MIEmparejamiento_perfectoActionPerformed"/>
+                  </Events>
                 </MenuItem>
               </SubComponents>
             </Menu>
@@ -202,6 +213,22 @@
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MIPareoBipartito_TontoActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="MIPareBipartito_Maximo">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Maximo"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MIPareBipartito_MaximoActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="MIPareoBipartito_Perfecto">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Perfecto"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MIPareoBipartito_PerfectoActionPerformed"/>
                   </Events>
                 </MenuItem>
               </SubComponents>

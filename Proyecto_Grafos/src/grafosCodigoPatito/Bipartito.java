@@ -23,6 +23,11 @@ public class Bipartito
     public static ArrayList<Nodo> getV1() { return v1; }
     public static ArrayList<Nodo> getV2() { return v2; }
     
+    //Es bipartito si
+    //1.- No tiene ciclo impar
+    //2.- Es bicoloreable (numero cromatico menor o igual a 2)
+    //3.- Es conexo
+    
     public static Boolean EsBipartito(boolean matriz[][], ArrayList<Nodo> Nodos)
     {
         Queue<Integer> cola = new LinkedList<>();
