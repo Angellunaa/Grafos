@@ -147,6 +147,7 @@ public class GN_maximo_edmonds_I
         int v = sc.nextInt();
         System.out.println("Ingresa cantidad de aristas: ");
         int e = sc.nextInt();
+        
         List<Integer>[] g = new List[v];
         for (int i = 0; i < v; i++)
         {
@@ -156,6 +157,11 @@ public class GN_maximo_edmonds_I
         for (int i = 0; i < e; i++)
         {
             g[sc.nextInt()].add(sc.nextInt());
+            System.out.println(g[i]);
+        }
+        for(List<Integer> list:g)
+        {
+            System.out.println(list.size());
         }
         System.out.println("El pareo maximo es de: "
                 + maxMatching(g));

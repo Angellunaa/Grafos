@@ -21,6 +21,12 @@ import java.util.Scanner;
 0 0 0 1 0 0 0
 0 0 0 1 0 0 0
 0 0 1 0 0 0 0
+
+0 1 1 0 1
+1 0 1 0 1
+1 1 0 1 0
+0 0 1 0 0
+1 1 0 0 0
 */
 
 
@@ -57,6 +63,8 @@ public class GN_tonto {
         int visitado[] = new int[n];
         int origen=0;
         int contV=0;
+        int cont=0;
+        int cont2=0;
         LinkedList cola = new LinkedList();
         cola.offer(origen); 
         while(!compvisit(visitado, n))
@@ -79,8 +87,27 @@ public class GN_tonto {
                             {
                                 origen=x;
                                 contV+=1;
+                                for(int j=0; j<n; j++)
+                                {
+                                       if(visitado[j]==1 && matriz[origen][j]==1)
+                                        {
+                                            cont+=1;
+                                            if(visitado[j]==1)
+                                            {
+                                                cont2+=1;
+                                            }
+                                        }
+                                }
+                                
+                            
                             }
                         }
+                        if(cont==cont2)
+                        {
+                            visitado[origen]=1;
+                            origen=origen-1;
+                        }
+                        
                         cola.offer(origen);
                         if(n%2==1 && contV==1)
                         {
@@ -88,6 +115,7 @@ public class GN_tonto {
                         }
                         contV=0;
                     }
+                    
                 }
                 
             }
